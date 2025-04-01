@@ -7,7 +7,7 @@ import sys
 
 TITLE = "Arkanoid by neq5@o2.pl"
 
-BALL_SPEED = 8
+BALL_SPEED = 5
 
 WIDTH = 800
 HEIGHT = 800
