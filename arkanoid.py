@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# pip3 install pgzero
 
 import random
 import pgzrun
@@ -14,8 +13,6 @@ HEIGHT = 800
 
 BALL_X_SPEED = BALL_SPEED
 BALL_Y_SPEED = BALL_SPEED
-
-loser = 0
 
 paddle = Actor("palette.png")
 paddle.x = WIDTH // 2
@@ -45,14 +42,9 @@ y = 50
 for color in box_list:
     place_bars(x, y, color)
     y += 31
-
-def check_loser():
-    global loser
-    if loser:
-        sys.exit("game over")
         
 def update_ball():
-    global BALL_X_SPEED, BALL_Y_SPEED, loser
+    global BALL_X_SPEED, BALL_Y_SPEED
     ball.x -= BALL_X_SPEED
     ball.y -= BALL_Y_SPEED
 
@@ -62,7 +54,7 @@ def update_ball():
     if ball.y <= 0:
         BALL_Y_SPEED *= -1
     if ball.y >= HEIGHT:
-        loser = 1
+        sys.exit("game over")
 
 def draw():
     screen.clear()
@@ -73,7 +65,7 @@ def draw():
         bar.draw()
 
 def update():
-    global BALL_X_SPEED, BALL_Y_SPEED, loser
+    global BALL_X_SPEED, BALL_Y_SPEED
     if keyboard.left:
         if paddle.x >= 1:
             paddle.x = paddle.x - 5
@@ -96,7 +88,5 @@ def update():
         rand = random.randint(0,1)
         if rand:
             BALL_X_SPEED *= -1
-
-    check_loser()
 
 pgzrun.go()
